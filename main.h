@@ -16,7 +16,6 @@
 void _strtok(char *buf, char *argv[]);
 char *_strstr(char* mainStr, char *sub);
 int is_only_spaces(const char *str);
-int _strlen(char *s);
 
 
 

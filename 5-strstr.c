@@ -15,7 +15,7 @@ char *_strstr(char* mainStr, char *sub)
 	int i, j;
 
 
-	int lenSubStr = _strlen(sub);
+	int lenSubStr = strlen(sub);
 	if (lenSubStr  !=  4)
 		return NULL;
 	for (int i = 0; i < 4; i++) {
