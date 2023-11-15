@@ -29,8 +29,7 @@ int main(int argc, char *argv[])
 	_strtok(buf, argv);
 	if (strcmp("exit",argv[0]) == 0)
 	{
-		free(buf);
-		exit(0);
+		break;
 	}
 
 	/**/
