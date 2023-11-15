@@ -1,4 +1,5 @@
 #include "main.h"
+extern char **environ;
 
 int main(int argc, char *argv[])
 {
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
 	{
 	
 	
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(argv[0], argv, environ) == -1)
 		{
 			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
 			{
