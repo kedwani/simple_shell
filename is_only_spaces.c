@@ -1,6 +1,6 @@
 #include "main.h"
 
-int is_only_spaces(const char *str) 
+int is_only_spaces(const char *str)
 {
 	while (*str != '\0') {
 	if (!isspace((unsigned char)*str))
