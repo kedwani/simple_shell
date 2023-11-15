@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 
 		if (execve(argv[0], argv, environ) == -1)
 		{
-			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
+			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 )
 			{
 				free(buf);
 				exit(EXIT_FAILURE);
