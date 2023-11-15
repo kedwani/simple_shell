@@ -25,13 +25,15 @@ int main(int argc, char *argv[])
 
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
+/**/
 	_strtok(buf, argv);
 	if (strcmp("exit",argv[0]) == 0)
 	{
 		free(buf);
 		exit(0);
 	}
-	
+
+	/**/
 	child = fork();
         if (child == -1)
 	{
