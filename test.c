@@ -25,7 +25,13 @@ int main(int argc, char *argv[])
 
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
-
+	_strtok(buf, argv);
+	if (strcmp("exit",argv[0]) == 0)
+	{
+		free(buf);
+		exit(0);
+	}
+	
 	child = fork();
         if (child == -1)
 	{
@@ -35,26 +41,21 @@ int main(int argc, char *argv[])
         }
 	else if (child == 0)
 	{
-            _strtok(buf, argv);
-	    if (strcmp("exit",argv[0]) == 0)
-	    {
-		    free(buf);
-	    		exit(0);
-	    }
-            if (execve(argv[0], argv, NULL) == -1)
-	    {
-		if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
+		
+		if (execve(argv[0], argv, NULL) == -1)
 		{
-			free(buf);
-			exit(EXIT_FAILURE);
+			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
+			{
+				free(buf);
+				exit(EXIT_FAILURE);
+			}
+			else
+			{
+				printf("%s: command not found\n", buf);
+				free(buf);
+				exit(EXIT_FAILURE);
+			}
 		}
-		else
-		{
-			printf("%s: command not found\n", buf);
-			free(buf);
-			exit(EXIT_FAILURE);
-		}
-            }
         }
 	else
 		wait(&status);
