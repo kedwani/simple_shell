@@ -7,13 +7,15 @@ int main(int argc, char *argv[])
     size_t n = 0;
     int status;
 
-    while (1) {
-        printf("$ ");
-        if (getline(&buf, &n, stdin) == -1) {
-            perror("getline failed");
-            free(buf);
-            exit(EXIT_FAILURE);
-        }
+    while (1)
+    {
+	    printf("$ ");
+	    if (getline(&buf, &n, stdin) == -1)
+	    {
+		    perror("getline failed");
+		    free(buf);
+		    exit(EXIT_FAILURE);
+	    }
 
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
@@ -25,36 +27,35 @@ int main(int argc, char *argv[])
         }
 
         /* space check*/
-        if (all_whitespace(buf)) {
-            continue;
-        }
+/*
+	if (all_whitespace(buf))
+		continue;
+*/
 
-        child = fork();
-        if (child == -1) {
-            perror("fork failed");
-            free(buf);
-            exit(EXIT_FAILURE);
-        } else if (child == 0) {
-            _strtok(buf, argv);
-            if (execve(argv[0], argv, NULL) == -1) {
-                perror("execve failed");
-                free(buf);
-                exit(EXIT_FAILURE);
-            }
-        } else {
-            wait(&status);
+/**/
+	child = fork();
+        if (child == -1)
+	{
+		perror("fork failed");
+		free(buf);
+		exit(EXIT_FAILURE);
         }
+	else if (child == 0)
+	{
+            _strtok(buf, argv);
+            if (execve(argv[0], argv, NULL) == -1)
+	    {
+		    perror("execve failed");
+		    free(buf);
+		    exit(EXIT_FAILURE);
+            }
+        }
+	else
+		wait(&status);
     }
 
     free(buf);
     return 0;
-}
-void _strtok(char *buf, char *argv[]) {
-    int i = 0;
-    argv[i] = strtok(buf, " ");
-    while (argv[i] != NULL) {
-        argv[++i] = strtok(NULL, " ");
-    }
 }
 
 int all_whitespace(const char *str)
