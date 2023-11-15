@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	    else
 		    if (getline(&buf, &n, stdin) == -1)
 			    exit(EXIT_FAILURE);
-	    
+
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
 
