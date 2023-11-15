@@ -12,7 +12,6 @@
 #include <sys/wait.h>
 
 
-char* cmd(void);
 
 
 
