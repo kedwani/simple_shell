@@ -1,0 +1,39 @@
+#include "main.h"
+
+extern char ** environ;
+
+int main (int argc,char ** argv)
+{
+	int j, status;
+	pid_t check;
+/**/
+	char *line = NULL;
+	size_t line_size;
+	int i = 2;
+	if (argc == 1)
+	{
+	printf("$ ");
+	getline(&line,&line_size,stdin);
+	argv[1] = strtok(line," ");
+        while ((argv[i]= strtok(NULL," ")))
+                ++i;
+	}
+
+	char **env = environ;
+/**/
+		check =fork();
+		if (check == 0)
+		{
+			j = execve(argv[1],argv,env);
+			printf("error file not found : %d \n",j);
+		}
+		else
+		{
+			wait(&status);
+			main(argc,argv);
+		}
+		free(line);
+
+	return (0);
+
+}
