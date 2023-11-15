@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
     char *buf = NULL;
     size_t n = 0;
     int status;
+    char *argu[9];
     (void) argc;
 
     while (1)
@@ -28,9 +29,9 @@ int main(int argc, char *argv[])
         buf[strcspn(buf, "\n")] = 0;
 /**/
 	_strtok(buf, argv);
-	if (argv[0] == NULL)
+	if (argv[1] == NULL)
 		continue;
-	if (strcmp("exit",argv[0]) == 0)
+	if (strcmp("exit",argv[1]) == 0)
 	{
 		free(buf);
 		exit(0);
@@ -45,17 +46,18 @@ int main(int argc, char *argv[])
         }
 	else if (child == 0)
 	{
-
-		if (execve(argv[0], argv, environ) == -1)
+		argu[0] = argv[1];
+		argu[1] =NULL;
+		if (execve(argv[1],argu , environ) == -1)
 		{
-			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 )
+			/*	if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 )
 			{
 				free(buf);
 				exit(EXIT_FAILURE);
-			}
-			else
+				}
+				else*/
 			{
-				printf("%s: command not found\n", buf);
+				printf("%s: No such file or directory\n",argv[0]);
 				free(buf);
 				exit(EXIT_FAILURE);
 			}
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
 	else
 		wait(&status);
     }
-
+    free (argu);
     free(buf);
     return 0;
 }
