@@ -14,9 +14,6 @@
 
 
 
-void _strtok(char *buf, char *argv[]);
-
-
 
 
 
