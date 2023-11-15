@@ -27,11 +27,13 @@ int main(int argc, char *argv[])
         buf[strcspn(buf, "\n")] = 0;
 /**/
 	_strtok(buf, argv);
+	if (argv[0] == NULL)
+		continue;
 	if (strcmp("exit",argv[0]) == 0)
 	{
-		break;
+		free(buf);
+		exit(0);
 	}
-
 	/**/
 	child = fork();
         if (child == -1)
@@ -42,7 +44,8 @@ int main(int argc, char *argv[])
         }
 	else if (child == 0)
 	{
-		
+	
+	
 		if (execve(argv[0], argv, NULL) == -1)
 		{
 			if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
