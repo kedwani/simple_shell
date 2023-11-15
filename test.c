@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	    if (strcmp("exit",argv[0]) == 0)
 	    {
 		    free(buf);
-	    		exit(0);
+	    		
 	    }
             if (execve(argv[0], argv, NULL) == -1)
 	    {
