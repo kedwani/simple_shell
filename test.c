@@ -11,15 +11,19 @@ int main(int argc, char *argv[])
     while (1)
     {
 	    if (isatty (STDIN_FILENO))
-		    printf("$ ");
-
-	    if (getline(&buf, &n, stdin) == -1)
 	    {
-		    perror("getline failed");
-		    free(buf);
-		    exit(EXIT_FAILURE);
+		    printf("$ ");
+		    if (getline(&buf, &n, stdin) == -1)
+		    {
+			    perror("getline failed");
+			    free(buf);
+			    exit(EXIT_FAILURE);
+		    }
 	    }
-
+	    else
+		    if (getline(&buf, &n, stdin) == -1)
+			    exit(EXIT_FAILURE);
+	    
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
 
