@@ -6,10 +6,13 @@ int main(int argc, char *argv[])
     char *buf = NULL;
     size_t n = 0;
     int status;
+    (void) argc;
 
     while (1)
     {
-	    printf("$ ");
+	    if (isatty (STDIN_FILENO))
+		    printf("$ ");
+
 	    if (getline(&buf, &n, stdin) == -1)
 	    {
 		    perror("getline failed");
