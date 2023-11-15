@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <ctype.h>
-
-void _strtok(char *buf, char *argv[]);
-int all_whitespace(const char *str);
+#include "main.h"
 
 int main(int argc, char *argv[])
 {
