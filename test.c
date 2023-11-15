@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
         buf[strcspn(buf, "\n")] = 0;
 
         /*exit */
-        if ((strstr(buf,"exit")) != NULL)
+        if ((_strstr(buf,"exit")) != NULL)
 	{
             break;
         }
