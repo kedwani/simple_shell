@@ -26,11 +26,6 @@ int main(int argc, char *argv[])
         /* remove the enter space>>\n*/
         buf[strcspn(buf, "\n")] = 0;
 
-        /*exit */
-        if ((_strstr(buf,"exit")) != NULL)
-	{
-            break;
-        }
 	child = fork();
         if (child == -1)
 	{
@@ -41,6 +36,8 @@ int main(int argc, char *argv[])
 	else if (child == 0)
 	{
             _strtok(buf, argv);
+	    if (strcmp(argv[0],"exit") == 0)
+		    break;
             if (execve(argv[0], argv, NULL) == -1)
 	    {
 		if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 || is_only_spaces(buf))
