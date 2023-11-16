@@ -8,7 +8,6 @@ int main(int argc, char *argv[],char *envp[])
     size_t n = 0;
     int status, i = 0;
     char *argu[9];
-
     (void) argc;
     (void) envp;
 
