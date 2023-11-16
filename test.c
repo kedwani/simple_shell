@@ -6,8 +6,9 @@ int main(int argc, char *argv[],char *envp[])
     pid_t child;
     char *buf = NULL;
     size_t n = 0;
-    int status;
+    int status, i = 0;
     char *argu[9];
+
     (void) argc;
     (void) envp;
 
@@ -47,21 +48,17 @@ int main(int argc, char *argv[],char *envp[])
         }
 	else if (child == 0)
 	{
-		argu[0] = argv[1];
-		argu[1] =NULL;
-		if (execve(argv[1],argu , environ) == -1)
+		while(argv[i+1])
 		{
-			/*	if (buf[0] == '\n' || buf[0] == '\0' || buf[0] == 13 )
-			{
-				free(buf);
-				exit(EXIT_FAILURE);
-				}
-				else*/
-			{
+			argu[i] = argv[i+1];
+			++i;
+		}
+		argu[i] = NULL;
+		if (execve(argv[1], argu, environ) == -1)
+		{
 				printf("%s: No such file or directory\n",argv[0]);
 				free(buf);
 				exit(EXIT_FAILURE);
-			}
 		}
         }
 	else
