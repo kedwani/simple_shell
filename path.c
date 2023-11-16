@@ -12,7 +12,7 @@ char *f_path(void)
 
 	while (*env)
 	{
-		if (_strncmp(*env, "PATH=", 5) == 0)
+		if (strncmp(*env, "PATH=", 5) == 0)
 		{
 			path = *env;
 			while (*path && x < 5)
