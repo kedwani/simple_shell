@@ -1,7 +1,7 @@
 #include "main.h"
 extern char **environ;
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[],char *envp[])
 {
     pid_t child;
     char *buf = NULL;
@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     int status;
     char *argu[9];
     (void) argc;
+    (void) envp;
 
     while (1)
     {
