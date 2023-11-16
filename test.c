@@ -49,8 +49,9 @@ int main(int argc, char *argv[], char *envp[])
 		else if (child == 0)
 		{
 		for (i = 0; argv[i + 1] != NULL; ++i)
+		{
 			argu[i] = argv[i + 1];
-
+		}
 			argu[i] = NULL;
 			if (execve(argv[1], argu, environ) == -1)
 			{
