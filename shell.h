@@ -48,7 +48,7 @@ typedef struct liststr
 	int num;
 	char *str;
 	struct liststr *next;
-} list_t
+} list_;t
 
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
