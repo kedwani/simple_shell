@@ -19,12 +19,12 @@ int main(int argc, char *argv[],char *envp[])
 			if (getline(&buf, &n, stdin) == -1)
 			 {
 				perror("getline fail");
-				exit(0);
+				exit(EXIT_FAILURE);
 			}
 		}
 	else
 		    if (getline(&buf, &n, stdin) == -1)
-			    exit(0);
+			    exit(EXIT_FAILURE);
 
 	    /* remove the enter space>>\n*/
 	    for (i = 0;buf[i] != '\0';++i)
@@ -45,7 +45,7 @@ int main(int argc, char *argv[],char *envp[])
 	    {
 		    perror("fork failed");
 		    free(buf);
-		    exit(0);
+		    exit(EXIT_FAILURE);
 	    }
 	    else if (child == 0)
 	    {
@@ -57,13 +57,13 @@ int main(int argc, char *argv[],char *envp[])
 		    {
 			    printf("%s: No such file or directory\n", argv[0]);
 			    free(buf);
-			    exit(0);
+			    exit(EXIT_FAILURE);
 		    }
 	    }
 	    else
 		    wait(&status);
     }
-	free (argu);
-	free(buf);
-    		return	(0);
+    free (argu);
+    free(buf);
+    return 0;
 }
