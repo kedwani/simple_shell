@@ -36,7 +36,6 @@ int main(int argc, char *argv[], char *envp[])
 		if (strcmp("env", argu[0]) == 0)
 		{
 			printenv();
-			free(buf);
 			continue;
 		}
 		child = fork();
