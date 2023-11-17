@@ -9,19 +9,11 @@ int main(int argc, char *argv[], char *envp[])
 	char *argu[1024];
 	(void) argc;
 	(void) envp;
-/*	(void) argv;
- */
+/*	(void) argv; */
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-		{
-			write(STDOUT_FILENO,"$ ",strlen("$ "));
-			if (getline(&buf, &n, stdin) == -1)
-			{
-				perror("getline fail");
-				exit(0);
-			}
-		}
+			interactive(&buf, &n);
 		else
 			if (getline(&buf, &n, stdin) == -1)
 			{
