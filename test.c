@@ -15,7 +15,7 @@ int main(int argc, char *argv[], char *envp[])
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("$ ");
+			write(STDOUT_FILENO,"$ ",2);
 			if (getline(&buf, &n, stdin) == -1)
 			{
 				perror("getline fail");
@@ -54,7 +54,7 @@ int main(int argc, char *argv[], char *envp[])
 			argu[i] = NULL;
 			if (execve(argv[1], argu, environ) == -1)
 			{
-				printf("%s: No such file or directory\n", argv[0]);
+				/*printf("%s: No such file or directory\n", argv[0]);*/
 				free(buf);
 				exit(0);
 			}
