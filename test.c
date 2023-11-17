@@ -36,7 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (_strcmp("exit", argv[1]) == 0)
 		{
 			free(buf);
-			exit(2);
+			exit(status/256);
 		}
 		child = fork();
 		if (child == -1)
@@ -64,5 +64,5 @@ int main(int argc, char *argv[], char *envp[])
 	}
 	free(argu);
 	free(buf);
-		return	(0);
+	return	(0);
 }
