@@ -1,5 +1,4 @@
 #include "main.h"
-char *environ[]
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -61,7 +60,7 @@ int main(int argc, char *argv[], char *envp[])
 			argu[i] = NULL;
 			if (execve(argv[1], argu, environ) == -1)
 			{
-				printf("%s: No such file or directory\n", argv[0]);*/
+				printf("%s: No such file or directory\n", argv[0]);
 				free(buf);
 				exit(STDERR_FILENO);
 			}
