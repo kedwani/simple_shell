@@ -1,10 +1,10 @@
 #include "main.h"
 
-void _strtok(char *buf, char *argv[])
+void _strtok(char *buf, char *argu[])
 {
-	int i = 2;
+	int i = 1;
 
-	argv[1] = strtok(buf, " ");
-	while ((argv[i] = strtok(NULL, " ")))
+	argu[0] = strtok(buf, " ");
+	while ((argu[i] = strtok(NULL, " ")))
 		++i;
 }

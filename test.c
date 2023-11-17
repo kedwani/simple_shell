@@ -25,15 +25,20 @@ int main(int argc, char *argv[], char *envp[])
 			if (buf[i] == '\n')
 				buf[i] = '\0';
 
-		_strtok(buf, argv);
-		if (argv[1] == NULL)
+		_strtok(buf, argu);
+		if (argu[0] == NULL)
 			continue;
-		if (strcmp("exit", argv[1]) == 0)
+		if (strcmp("exit", argu[0]) == 0)
 		{
 			free(buf);
 			exit(WEXITSTATUS(status));
 		}
-
+		if (strcmp("env", argu[0]) == 0)
+		{
+			printenv();
+			free(buf);
+			continue;
+		}
 		child = fork();
 		if (child == -1)
 		{
@@ -43,14 +48,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else if (child == 0)
 		{
-
-			for (i = 0; argv[i + 1] != NULL; ++i)
-		{
-			argu[i] = argv[i + 1];
-		}
-
-			argu[i] = NULL;
-			if (execve(argv[1], argu, environ) == -1)
+			if (execve(argu[0], argu, environ) == -1)
 			{
 				printf("%s: No such file or directory\n", argv[0]);
 				free(buf);
