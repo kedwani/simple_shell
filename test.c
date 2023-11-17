@@ -34,11 +34,11 @@ int main(int argc, char *argv[], char *envp[])
 			continue;
 		}
 		status = path(argu,argv,child);
+		free(buf);
 	}
 	free(argu);
 	free(buf);
 	return	(0);
-
 }
 
 
@@ -46,7 +46,7 @@ int path(char **argu,char **argv,pid_t child)
 {
         int i,status = 0;
         char **env = environ;
-        char *tmp=NULL ,*t=malloc(1024);
+        char *tmp=NULL ,*t=malloc(1023);
         char * path [1024];
 	struct stat statbuf;
 
@@ -55,7 +55,6 @@ int path(char **argu,char **argv,pid_t child)
                 if (strncmp("PATH=",env[i],5) == 0)
                         tmp = strchr(env[i],'/');
 	}
-        strcat(tmp,":.");
         _strttok(tmp,path);
         for (i = 0;path[i] != NULL;++i)
         {
@@ -68,16 +67,24 @@ int path(char **argu,char **argv,pid_t child)
 			if (child == 0)
 			{
 				strcpy(argu[0],t);
+				free(t);
 				execve(argu[0], argu, environ);
 			}
 			else
+			{
 				wait(&status);
-			return(status);
+				free(t);
+				return(status);
+			}
 		}
         }
-	printf("%s: No such file or directory\n", argv[0]);
 	free(t);
-	return(512);
+	if ((execve(argu[0],argu,environ)) == -1)
+	{
+		printf("%s: No such file or directory\n", argv[0]);
+		return(512);
+	}
+	return(status);
 }
 void _strttok(char *tmp,char **path)
 {
