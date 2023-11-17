@@ -15,7 +15,7 @@ int main(int argc, char *argv[], char *envp[])
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			write(STDOUT_FILENO,"$ ",2);
+			write(STDOUT_FILENO,"$ ",strlen("$ "));
 			if (getline(&buf, &n, stdin) == -1)
 			{
 				perror("getline fail");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[], char *envp[])
 			free(buf);
 			exit(WEXITSTATUS(status));
 		}
-		
+
 		child = fork();
 		if (child == -1)
 		{
