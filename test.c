@@ -5,7 +5,7 @@ int main(int argc, char *argv[], char *envp[])
 	pid_t child = 0;
 	char *buf = NULL;
 	size_t n = 0;
-	int status = 0, i = 0;
+	int status = 0 ;
 	char *argu[1024];
 	(void) argc;
 	(void) envp;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[], char *envp[])
 			printenv();
 			continue;
 		}
-		status = path(buf,argu,argv,child);
+		status = path(argu,argv,child);
 	}
 	free(argu);
 	free(buf);
@@ -42,7 +42,7 @@ int main(int argc, char *argv[], char *envp[])
 }
 
 
-int path(char *buf,char **argu,char **argv,pid_t child)
+int path(char **argu,char **argv,pid_t child)
 {
         int i,status = 0;
         char **env = environ;
@@ -68,20 +68,16 @@ int path(char *buf,char **argu,char **argv,pid_t child)
 			if (child == 0)
 			{
 				strcpy(argu[0],t);
-				if (execve(argu[0], argu, environ) == -1)
-				{
-					printf("%s: No such file or directory\n", argv[0]);
-					free(buf);
-					exit(STDERR_FILENO);
-				}
+				execve(argu[0], argu, environ);
 			}
 			else
 				wait(&status);
-			break;
+			return(status);
 		}
         }
+	printf("%s: No such file or directory\n", argv[0]);
 	free(t);
-	return(status);
+	return(512);
 }
 void _strttok(char *tmp,char **path)
 {
