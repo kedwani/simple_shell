@@ -1,5 +1,5 @@
 #include "main.h"
-
+char *environ[]
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -7,7 +7,7 @@ int main(int argc, char *argv[], char *envp[])
 	char *buf = NULL;
 	size_t n = 0;
 	int status = 0, i = 0;
-	char *argu[9];
+	char *argu[1024];
 	(void) argc;
 	(void) envp;
 /*	(void) argv;
@@ -23,16 +23,17 @@ int main(int argc, char *argv[], char *envp[])
 				exit(0);
 			}
 		}
-	else
-		if (getline(&buf, &n, stdin) == -1)
-		{
-			free(buf);
-			exit(0);
-		}
+		else
+			if (getline(&buf, &n, stdin) == -1)
+			{
+				free(buf);
+				exit(0);
+			}
 	    /* remove the enter space>>\n*/
 		for (i = 0; buf[i] != '\0'; ++i)
 			if (buf[i] == '\n')
 				buf[i] = '\0';
+
 		_strtok(buf, argv);
 		if (argv[1] == NULL)
 			continue;
@@ -56,11 +57,11 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			argu[i] = argv[i + 1];
 		}
-			
+
 			argu[i] = NULL;
 			if (execve(argv[1], argu, environ) == -1)
 			{
-				/*printf("%s: No such file or directory\n", argv[0]);*/
+				printf("%s: No such file or directory\n", argv[0]);*/
 				free(buf);
 				exit(STDERR_FILENO);
 			}
