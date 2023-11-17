@@ -36,7 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (_strcmp("exit", argv[1]) == 0)
 		{
 			free(buf);
-			exit(status/256);
+			exit(WEXITSTATUS(status));
 		}
 		child = fork();
 		if (child == -1)
@@ -56,7 +56,7 @@ int main(int argc, char *argv[], char *envp[])
 			{
 				/*printf("%s: No such file or directory\n", argv[0]);*/
 				free(buf);
-				exit(2);
+				exit(STDERR_FILENO);
 			}
 		}
 		else
