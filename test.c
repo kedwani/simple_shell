@@ -36,7 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 		_strtok(buf, argv);
 		if (argv[1] == NULL)
 			continue;
-		if (_strcmp("exit", argv[1]) == 0)
+		if (strcmp("exit", argv[1]) == 0)
 		{
 			free(buf);
 			exit(WEXITSTATUS(status));
