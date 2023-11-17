@@ -10,6 +10,7 @@ int main(int argc, char *argv[], char *envp[])
 	char *argu[9];
 	(void) argc;
 	(void) envp;
+	(void) argv;
 
 	while (1)
 	{
@@ -30,7 +31,7 @@ int main(int argc, char *argv[], char *envp[])
 		for (i = 0; buf[i] != '\0'; ++i)
 			if (buf[i] == '\n')
 				buf[i] = '\0';
-		_strtok(buf, argv);
+		/*_strtok(buf, argv);
 		if (argv[1] == NULL)
 			continue;
 		if (_strcmp("exit", argv[1]) == 0)
@@ -38,6 +39,7 @@ int main(int argc, char *argv[], char *envp[])
 			free(buf);
 			exit(WEXITSTATUS(status));
 		}
+		*/
 		child = fork();
 		if (child == -1)
 		{
@@ -47,17 +49,20 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else if (child == 0)
 		{
-		for (i = 0; argv[i + 1] != NULL; ++i)
+
+			/*for (i = 0; argv[i + 1] != NULL; ++i)
 		{
 			argu[i] = argv[i + 1];
 		}
-			argu[i] = NULL;
-			if (execve(argv[1], argu, environ) == -1)
+			*/
+			argu[0]=buf;
+			argu[1] = NULL;
+			if (execve(buf, argu, environ) == -1)
 			{
 				/*printf("%s: No such file or directory\n", argv[0]);*/
 				free(buf);
 				exit(STDERR_FILENO);
-			}
+				}
 		}
 		else
 			wait(&status);
