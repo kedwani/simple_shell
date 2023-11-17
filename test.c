@@ -25,8 +25,10 @@ int main(int argc, char *argv[], char *envp[])
 		}
 	else
 		if (getline(&buf, &n, stdin) == -1)
+		{
+			free(buf);
 			exit(0);
-
+		}
 	    /* remove the enter space>>\n*/
 		for (i = 0; buf[i] != '\0'; ++i)
 			if (buf[i] == '\n')
