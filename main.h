@@ -14,9 +14,6 @@
 
 
 void _strtok(char *buf, char *argv[]);
-char *_strstr(char *mainStr, char *sub);
-int is_only_spaces(const char *str);
-int _strcmp(char *s1, char *s2);
 
 extern char **environ;
 
