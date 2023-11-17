@@ -7,5 +7,4 @@ void _strtok(char *buf, char *argv[])
 	argv[1] = strtok(buf, " ");
 	while ((argv[i] = strtok(NULL, " ")))
 		++i;
-	exit(0);
 }
