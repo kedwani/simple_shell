@@ -6,7 +6,7 @@ int main(int argc, char *argv[], char *envp[])
 	pid_t child;
 	char *buf = NULL;
 	size_t n = 0;
-	int status, i = 0;
+	int status = 0, i = 0;
 	char *argu[9];
 	(void) argc;
 	(void) envp;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (_strcmp("exit", argv[1]) == 0)
 		{
 			free(buf);
-			exit(0);
+			exit(2);
 		}
 		child = fork();
 		if (child == -1)
@@ -56,7 +56,7 @@ int main(int argc, char *argv[], char *envp[])
 			{
 				/*printf("%s: No such file or directory\n", argv[0]);*/
 				free(buf);
-				exit(0);
+				exit(2);
 			}
 		}
 		else
