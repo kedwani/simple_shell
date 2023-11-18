@@ -19,7 +19,7 @@ char *_strstr(char *mainStr, char *sub);
 int _strcmp(char *s1, char *s2);
 void printenv (void);
 void _strttok(char *tmp,char **path);
-void path(char **argu,char **argv,pid_t child,int );
+void path(char **argu,char **argv,pid_t child,int* );
 
 extern char **environ;
 
