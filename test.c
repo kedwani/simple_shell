@@ -39,7 +39,7 @@ int main(int argc, char *argv[], char *envp[])
 			continue;
 		}
 		status = path(buf,argu,argv,child);
-/*		child = fork();
+		child = fork();
 		if (child == -1)
 		{
 			perror("fork failed");
@@ -57,7 +57,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else
 			wait(&status);
-*/
+
 	}
 	free(argu);
 	free(buf);
