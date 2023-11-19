@@ -2,13 +2,14 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	var.status = 0;
-	int i=0;
+	int i = 0;
 	(void) argc;
 	(void) envp;
 	var.argv = argv;
 
 	while (1)
 	{
+/* check is input is terminal or not */
 		if (isatty(STDIN_FILENO))
 			rd_line();
 		else
@@ -22,15 +23,13 @@ int srch(void)
         int i;
         char **env = environ;
         char *tmp = NULL;
-        char * path[100]={0};
+        char * path[100] = {0};
         struct stat statbuf;
 	char t[1022];
 	char tt[1024];
 
 	for (i = 0;env[i] != NULL;++i)
 	{
-/*		printf("inside env [%d] equal to %s \n",i,env[i]);
- */
 		if (strncmp("PATH=",env[i],5) == 0)
 		{
 			if(strchr(env[i],'/'))
