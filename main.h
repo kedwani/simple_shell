@@ -12,17 +12,31 @@
 #include <sys/wait.h>
 #include <ctype.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <signal.h>
 
-void interactive(char **buf, size_t *n);
-void _strtok(char *buf, char *argv[]);
-char *_strstr(char *mainStr, char *sub);
-int _strcmp(char *s1, char *s2);
+
+int rd_line(void);
+int tokenizer(void);
 void printenv (void);
-void _strttok(char *tmp,char **path);
-int path(char *buf,char **argu,char **argv,pid_t child );
+int srch(void);
+int g_line(void);
+int _excute (char*,char**);
+
 
 extern char **environ;
 
+struct info
+{
+	pid_t child;
+	char *command[100];
+	int status;
+	char *buf;
+	size_t n;
+	char **argv;
+};
+
+struct info var;
 
 
 

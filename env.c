@@ -1,12 +1,11 @@
 #include "main.h"
-void printenv (void)
+void printenv()
 {
-	int i;
-	char ** env = environ;
-
-	if (env)
-		for(i=0;env[i]!= NULL;++i)
-			printf("%s\n",env[i]);
-	else
-		printf("SHLVL=0\n");
+ 	int i =0;
+        char **env = environ;
+	while (env[i])
+        {
+                printf("%s\n",env[i]);
+                ++i;
+        }
 }
