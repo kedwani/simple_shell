@@ -2,7 +2,6 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	var.status = 0;
-	int i = 0;
 	(void) argc;
 	(void) envp;
 	var.argv = argv;
@@ -15,16 +14,16 @@ int main(int argc, char *argv[], char *envp[])
 		else
 			g_line();
 	}
-	return(var.status);
+	return (var.status);
 }
 
 int srch(void)
 {
-        int i;
-        char **env = environ;
-        char *tmp = NULL;
-        char * path[100] = {0};
-        struct stat statbuf;
+	int i;
+	char **env = environ;
+	char *tmp = NULL;
+	char *path[100] = {0};
+	struct stat statbuf;
 	char t[1022];
 	char tt[1024];
 /*searching for the PATH and get it's value*/
@@ -32,7 +31,7 @@ int srch(void)
 	{
 		if (strncmp("PATH=", env[i], 5) == 0)
 		{
-			if(strchr(env[i], '/'))
+			if (strchr(env[i], '/'))
 				tmp = strdup(strchr(env[i], '/'));
 /*if PATH's value is empty or NULL (exit with 127) */
 			else
@@ -43,14 +42,16 @@ int srch(void)
 /*if env's value is empty or NULL (exit with 127) */
 	if (env == NULL || strcmp(env[0], "SHLVL=0") == 0)
 		var.status = (127 * 256);
-/*if command name is not begine with root dir or . (which indecate that
- *the excutable in the working dir)(exit with 127) */
+/**
+ *if command name is not begine with root dir or . (which indecate that
+    the excutable in the working dir)(exit with 127)
+ */
 	if (var.command[0][0] == '/' || var.command[0][0] == '.')
 		var.status = 0;
 	else
 		var.status = (127 * 256);
 /* tokenise the PATH  and excute command if found*/
-	if (tmp != NULL && tmp != "")
+	if (tmp != NULL)
 	{
 		strcpy(tt, tmp);
 		i = 1;
@@ -86,30 +87,30 @@ int srch(void)
 	return (0);
 }
 
-int rd_line (void)
+int rd_line(void)
 {
 	printf("$ ");
 
-        if (getline(&var.buf, &var.n, stdin) == -1)
-        {
+	if (getline(&var.buf, &var.n, stdin) == -1)
+	{
 		free(var.buf);
 		perror("getline failed");
-		exit (0);
-        }
+		exit(0);
+	}
 	tokenizer();
 	return (0);
 }
 int tokenizer(void)
 {
-        int j = 1, i;
+	int j = 1, i;
 /*to remove the enter key  from input*/
 	for (i = 0; var.buf[i] != '\0'; ++i)
 		if (var.buf[i] == '\n')
 			var.buf[i] = '\0';
 /*tokenize the input */
-        var.command[0] = strtok(var.buf, " ");
-        while ((var.command[j] = strtok(NULL, " "))!= NULL)
-                ++j;
+	var.command[0] = strtok(var.buf, " ");
+	while ((var.command[j] = strtok(NULL, " ")) != NULL)
+		++j;
 	if (var.command[0] == NULL)
 		return (0);
 /*built in commands*/
@@ -127,23 +128,12 @@ int tokenizer(void)
 	return (0);
 }
 
-int g_line (void)
+int _excute(char *name, char **command)
 {
-	if (getline(&var.buf, &var.n, stdin) == -1)
-	{
-		free(var.buf);
-		exit(WEXITSTATUS(var.status));
-	}
-	tokenizer();
-	return(0);
-}
-int _excute (char *name, char **command)
-{
-
 	var.child = fork();
 	if (var.child == 0)
 	{
-		if (execve(name, command, environ) == -1);
+		if (execve(name, command, environ) == -1)
 		{
 			printf("%s: No such file or directory\n", var.argv[0]);
 			free(var.buf);
