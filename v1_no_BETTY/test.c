@@ -26,23 +26,31 @@ int srch(void)
 	struct stat statbuf;
 	char t[1022];
 	char tt[1024];
+/*searching for the PATH and get it's value*/
 	for (i = 0; env[i] != NULL; ++i)
 	{
 		if (strncmp("PATH=", env[i], 5) == 0)
 		{
 			if (strchr(env[i], '/'))
 				tmp = strdup(strchr(env[i], '/'));
+/*if PATH's value is empty or NULL (exit with 127) */
 			else
 				var.status = (127 * 256);
 			break;
 		}
 	}
+/*if env's value is empty or NULL (exit with 127) */
 	if (env == NULL || strcmp(env[0], "SHLVL=0") == 0)
 		var.status = (127 * 256);
+/**
+ *if command name is not begine with root dir or . (which indecate that
+    the excutable in the working dir)(exit with 127)
+ */
 	if (var.command[0][0] == '/' || var.command[0][0] == '.')
 		var.status = 0;
 	else
 		var.status = (127 * 256);
+/* tokenise the PATH  and excute command if found*/
 	if (tmp != NULL)
 	{
 		strcpy(tt, tmp);

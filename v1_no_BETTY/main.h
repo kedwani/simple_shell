@@ -18,10 +18,10 @@
 
 int rd_line(void);
 int tokenizer(void);
-void printenv(void);
+void printenv (void);
 int srch(void);
 int g_line(void);
-int _excute(char*, char**);
+int _excute (char*,char**);
 int path_tokenizer(char **tmp, char ***path);
 
 
