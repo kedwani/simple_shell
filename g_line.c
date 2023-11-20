@@ -28,16 +28,3 @@ int g_line(void)
 /* Return 0 after reading and tokenizing the input line */
 	return (0);
 }
-
-
-
-int g_line(void)
-{
-	if (getline(&var.buf, &var.n, stdin) == -1)
-	{
-		free(var.buf);
-		exit(WEXITSTATUS(var.status));
-	}
-	tokenizer();
-	return (0);
-}
